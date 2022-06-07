@@ -36,19 +36,19 @@ public class ProductCategoryService {
     }
 
     public List<ProductCategoryResponseDto> createCategory(final ProductCategoryCreateDto dto) {
-        final ProductCategory categoryToCreate = new ProductCategory(dto.getName());
-        repository.save(categoryToCreate);
+        final ProductCategory dtoMappedToEntity = new ProductCategory(dto.getName());
+        final ProductCategory createdCategory = repository.save(dtoMappedToEntity);
 
-        return createListWithEntityMappedToDto(categoryToCreate);
+        return createListWithEntityMappedToDto(createdCategory);
     }
 
     public List<ProductCategoryResponseDto> updateCategory(final ProductCategoryUpdateDto dto) {
         findCategoryByIdOrThrowException(dto.getId());
 
-        final ProductCategory categoryToUpdate = new ProductCategory(dto.getId(), dto.getName());
-        repository.save(categoryToUpdate);
+        final ProductCategory dtoMappedToEntity = new ProductCategory(dto.getId(), dto.getName());
+        final ProductCategory updatedCategory = repository.save(dtoMappedToEntity);
 
-        return createListWithEntityMappedToDto(categoryToUpdate);
+        return createListWithEntityMappedToDto(updatedCategory);
     }
 
     public List<ProductCategoryResponseDto> removeCategory(final Long id) {
@@ -61,7 +61,7 @@ public class ProductCategoryService {
 
     private ProductCategory findCategoryByIdOrThrowException(final Long id) {
         return repository.findById(id).orElseThrow(
-            () -> new ProductCategoryNotFoundException("Category is not found")
+            () -> new ProductCategoryNotFoundException("Category with 'id' = " + id + " is not found")
         );
     }
 

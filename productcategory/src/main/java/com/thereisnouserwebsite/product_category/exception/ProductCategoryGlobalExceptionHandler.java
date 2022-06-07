@@ -24,7 +24,7 @@ public class ProductCategoryGlobalExceptionHandler extends ResponseEntityExcepti
         final HttpStatus status,
         final WebRequest request
     ) {
-        final StringBuilder messageBuilder = new StringBuilder("");
+        final StringBuilder messageBuilder = new StringBuilder();
 
         for (FieldError fieldError : e.getFieldErrors()) {
             messageBuilder.append("'" + fieldError.getField() + "' " + fieldError.getDefaultMessage() + "; ");
@@ -42,7 +42,8 @@ public class ProductCategoryGlobalExceptionHandler extends ResponseEntityExcepti
     @ExceptionHandler(ProductCategoryNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public ResponseEntity handleProductCategoryNotFoundException(final ProductCategoryNotFoundException e) {
-        final ProductCategoryResponse response = new ProductCategoryResponse(HttpStatus.NOT_FOUND, e.getMessage());
+        final ProductCategoryResponse response = new ProductCategoryResponse(HttpStatus.NOT_FOUND,
+                                                                             e.getMessage());
         return new ResponseEntity(response, HttpStatus.NOT_FOUND);
     }
 

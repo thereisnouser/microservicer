@@ -1,13 +1,13 @@
 package com.thereisnouserwebsite.product.dto;
 
-import com.thereisnouserwebsite.product.entity.Product;
 import java.util.Objects;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
-public class ProductRequestDto {
+public class ProductUpdateDto {
 
+    @NotNull
     @Min(1)
     private Long id;
 
@@ -18,27 +18,15 @@ public class ProductRequestDto {
     @Min(0)
     private Long quantity;
 
-    public ProductRequestDto() {
+    public ProductUpdateDto() {
     }
 
-    public ProductRequestDto(final Long id,
-                             final String name,
-                             final Long quantity) {
+    public ProductUpdateDto(final Long id,
+                            final String name,
+                            final Long quantity) {
         this.id = id;
         this.name = name;
         this.quantity = quantity;
-    }
-
-    public ProductRequestDto(final String name,
-                             final Long quantity) {
-        this.name = name;
-        this.quantity = quantity;
-    }
-
-    public ProductRequestDto(final Product entity) {
-        this.id = entity.getId();
-        this.name = entity.getName();
-        this.quantity = entity.getQuantity();
     }
 
     public Long getId() {
@@ -84,7 +72,7 @@ public class ProductRequestDto {
             return false;
         }
 
-        final ProductRequestDto other = (ProductRequestDto) obj;
+        final ProductUpdateDto other = (ProductUpdateDto) obj;
 
         if (!Objects.equals(this.name, other.name)) {
             return false;
@@ -97,6 +85,6 @@ public class ProductRequestDto {
 
     @Override
     public String toString() {
-        return "ProductDto{" + "id=" + id + ", name=" + name + ", quantity=" + quantity + "}";
+        return "ProductUpdateDto{" + "id=" + id + ", name=" + name + ", quantity=" + quantity + "}";
     }
 }

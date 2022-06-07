@@ -1,79 +1,72 @@
 package com.thereisnouserwebsite.product.service;
 
-import com.thereisnouserwebsite.product.dto.ProductRequestDto;
+import com.thereisnouserwebsite.product.dto.ProductCreateDto;
+import com.thereisnouserwebsite.product.dto.ProductResponseDto;
+import com.thereisnouserwebsite.product.dto.ProductUpdateDto;
 import com.thereisnouserwebsite.product.entity.Product;
-import com.thereisnouserwebsite.product.exception.BadRequestException;
 import com.thereisnouserwebsite.product.exception.ProductNotFoundException;
 import com.thereisnouserwebsite.product.repository.ProductRepository;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
-import javax.validation.Valid;
-import javax.validation.constraints.Min;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.validation.annotation.Validated;
 
 @Service
-@Validated
 public class ProductService {
 
-    private final ProductRepository productRepository;
+    private final ProductRepository repository;
 
     @Autowired
-    public ProductService(final ProductRepository productRepository) {
-        this.productRepository = productRepository;
+    public ProductService(final ProductRepository repository) {
+        this.repository = repository;
     }
 
-    public List<ProductRequestDto> getAllProducts() {
-        return productRepository
+    public List<ProductResponseDto> getAllProducts() {
+        return repository
             .findAll()
             .stream()
-            .map(ProductRequestDto::new)
+            .map(ProductResponseDto::new)
             .collect(Collectors.toList());
     }
 
-    public List<ProductRequestDto> getProductById(@Min(1) final Long id) {
+    public List<ProductResponseDto> getProductById(final Long id) {
         final Product product = findProductByIdOrThrowException(id);
-        return entityToListOfRequestDto(product);
+        return createListWithEntityMappedToDto(product);
     }
 
-    public List<ProductRequestDto> createProduct(@Valid final ProductRequestDto dto) {
-        final Product productDtoMappedToEntity = new Product(dto.getName(), dto.getQuantity());
-        final Product savedProduct = productRepository.save(productDtoMappedToEntity);
+    public List<ProductResponseDto> createProduct(final ProductCreateDto dto) {
+        final Product dtoMappedToEntity = new Product(dto.getName(), dto.getQuantity());
+        final Product savedProduct = repository.save(dtoMappedToEntity);
 
-        return entityToListOfRequestDto(savedProduct);
+        return createListWithEntityMappedToDto(savedProduct);
     }
 
-    public List<ProductRequestDto> updateProduct(@Valid final ProductRequestDto dto) {
-        final Long dtoId = dto.getId();
+    public List<ProductResponseDto> updateProduct(final ProductUpdateDto dto) {
+        findProductByIdOrThrowException(dto.getId());
 
-        if (dtoId == null) {
-            throw new BadRequestException("Field 'id' can not be empty");
-        }
-        findProductByIdOrThrowException(dtoId);
+        final Product dtoMappedToEntity = new Product(dto.getId(), dto.getName(), dto.getQuantity());
+        final Product updatedProduct = repository.save(dtoMappedToEntity);
 
-        final Product productDtoMappedToEntity = new Product(dto.getId(), dto.getName(), dto.getQuantity());
-        final Product updatedProduct = productRepository.save(productDtoMappedToEntity);
-
-        return entityToListOfRequestDto(updatedProduct);
+        return createListWithEntityMappedToDto(updatedProduct);
     }
 
-    public List<ProductRequestDto> removeProductById(@Min(1) final Long id) {
-        final Product productToDelete = findProductByIdOrThrowException(id);
+    public List<ProductResponseDto> removeProductById(final Long id) {
+        final Product productToRemove = findProductByIdOrThrowException(id);
 
-        productRepository.deleteById(id);
+        repository.deleteById(id);
 
-        return entityToListOfRequestDto(productToDelete);
+        return createListWithEntityMappedToDto(productToRemove);
     }
 
     private Product findProductByIdOrThrowException(final Long id) {
-        return productRepository.findById(id).orElseThrow(
+        return repository.findById(id).orElseThrow(
             () -> new ProductNotFoundException("Product with 'id' = " + id + " is not found")
         );
     }
 
-    private List<ProductRequestDto> entityToListOfRequestDto(final Product entity) {
-        return Arrays.asList(new ProductRequestDto(entity));
+    private List<ProductResponseDto> createListWithEntityMappedToDto(final Product entity) {
+        return Arrays.asList(new ProductResponseDto(entity));
     }
 }

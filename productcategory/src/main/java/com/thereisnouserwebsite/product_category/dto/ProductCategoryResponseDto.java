@@ -16,10 +16,6 @@ public class ProductCategoryResponseDto {
         this.name = name;
     }
 
-    public ProductCategoryResponseDto(final String name) {
-        this.name = name;
-    }
-
     public ProductCategoryResponseDto(final ProductCategory entity) {
         this.id = entity.getId();
         this.name = entity.getName();

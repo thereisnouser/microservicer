@@ -35,32 +35,32 @@ public class ProductCategoryController {
 
     @GetMapping
     public ResponseEntity getAllCategories() {
-        final List<ProductCategoryResponseDto> result = service.getAllCategories();
-        return createSuccessResponseWithData(result);
+        final List<ProductCategoryResponseDto> categories = service.getAllCategories();
+        return createSuccessResponseWithData(categories);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity getCategoryById(@PathVariable("id") @Min(1) final Long id) {
-        final List<ProductCategoryResponseDto> result = service.getCategoryById(id);
-        return createSuccessResponseWithData(result);
+        final List<ProductCategoryResponseDto> category = service.getCategoryById(id);
+        return createSuccessResponseWithData(category);
     }
 
     @PostMapping
     public ResponseEntity createCategory(@Valid @RequestBody final ProductCategoryCreateDto dto) {
-        final List<ProductCategoryResponseDto> result = service.createCategory(dto);
-        return createSuccessResponseWithData(result);
+        final List<ProductCategoryResponseDto> createdCategory = service.createCategory(dto);
+        return createSuccessResponseWithData(createdCategory);
     }
 
     @PutMapping
     public ResponseEntity updateCategory(@Valid @RequestBody final ProductCategoryUpdateDto dto) {
-        final List<ProductCategoryResponseDto> result = service.updateCategory(dto);
-        return createSuccessResponseWithData(result);
+        final List<ProductCategoryResponseDto> updatedCategory = service.updateCategory(dto);
+        return createSuccessResponseWithData(updatedCategory);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity removeCategory(@PathVariable("id") @Min(1) final Long id) {
-        final List<ProductCategoryResponseDto> result = service.removeCategory(id);
-        return createSuccessResponseWithData(result);
+        final List<ProductCategoryResponseDto> removedCategory = service.removeCategory(id);
+        return createSuccessResponseWithData(removedCategory);
     }
 
     private ResponseEntity createSuccessResponseWithData(final List<ProductCategoryResponseDto> data) {
