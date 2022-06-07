@@ -1,7 +1,9 @@
 package com.thereisnouserwebsite.product.controller;
 
-import com.thereisnouserwebsite.product.dto.ProductRequestDto;
+import com.thereisnouserwebsite.product.dto.ProductCreateDto;
 import com.thereisnouserwebsite.product.dto.ProductResponseDto;
+import com.thereisnouserwebsite.product.dto.ProductUpdateDto;
+import com.thereisnouserwebsite.product.response.ProductResponse;
 import com.thereisnouserwebsite.product.service.ProductService;
 import java.util.List;
 import javax.validation.Valid;
@@ -24,45 +26,45 @@ import org.springframework.web.bind.annotation.RestController;
 @Validated
 public class ProductController {
 
-    private final ProductService productService;
+    private final ProductService service;
 
     @Autowired
-    public ProductController(final ProductService productService) {
-        this.productService = productService;
+    public ProductController(final ProductService service) {
+        this.service = service;
     }
 
     @GetMapping
     public ResponseEntity getAllProducts() {
-        final List<ProductRequestDto> products = productService.getAllProducts();
+        final List<ProductResponseDto> products = service.getAllProducts();
         return createSuccessResponseWithData(products);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity getProductById(@PathVariable("id") @Min(1) final Long id) {
-        final List<ProductRequestDto> product = productService.getProductById(id);
+        final List<ProductResponseDto> product = service.getProductById(id);
         return createSuccessResponseWithData(product);
     }
 
     @PostMapping
-    public ResponseEntity createProduct(@Valid @RequestBody final ProductRequestDto dto) {
-        final List<ProductRequestDto> createdProduct = productService.createProduct(dto);
+    public ResponseEntity createProduct(@Valid @RequestBody final ProductCreateDto dto) {
+        final List<ProductResponseDto> createdProduct = service.createProduct(dto);
         return createSuccessResponseWithData(createdProduct);
     }
 
     @PutMapping
-    public ResponseEntity updateProduct(@Valid @RequestBody final ProductRequestDto dto) {
-        final List<ProductRequestDto> updatedProduct = productService.updateProduct(dto);
+    public ResponseEntity updateProduct(@Valid @RequestBody final ProductUpdateDto dto) {
+        final List<ProductResponseDto> updatedProduct = service.updateProduct(dto);
         return createSuccessResponseWithData(updatedProduct);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity removeProductById(@PathVariable("id") @Min(1) final Long id) {
-        final List<ProductRequestDto> removedProduct = productService.removeProductById(id);
+        final List<ProductResponseDto> removedProduct = service.removeProductById(id);
         return createSuccessResponseWithData(removedProduct);
     }
 
-    private ResponseEntity createSuccessResponseWithData(final List<ProductRequestDto> products) {
-        final ProductResponseDto response = new ProductResponseDto(HttpStatus.OK, "Success", products);
+    private ResponseEntity createSuccessResponseWithData(final List<ProductResponseDto> products) {
+        final ProductResponse response = new ProductResponse(HttpStatus.OK, "Success", products);
         return new ResponseEntity(response, HttpStatus.OK);
     }
 }

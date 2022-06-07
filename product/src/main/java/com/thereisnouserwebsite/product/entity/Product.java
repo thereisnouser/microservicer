@@ -1,6 +1,5 @@
 package com.thereisnouserwebsite.product.entity;
 
-import com.thereisnouserwebsite.product.dto.ProductRequestDto;
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -39,12 +38,6 @@ public class Product {
                    final Long quantity) {
         this.name = name;
         this.quantity = quantity;
-    }
-
-    public Product(final ProductRequestDto dto) {
-        this.id = dto.getId();
-        this.name = dto.getName();
-        this.quantity = dto.getQuantity();
     }
 
     public Long getId() {
@@ -97,7 +90,6 @@ public class Product {
         } else if (!Objects.equals(this.id, other.id)) {
             return false;
         }
-
         return Objects.equals(this.quantity, other.quantity);
     }
 

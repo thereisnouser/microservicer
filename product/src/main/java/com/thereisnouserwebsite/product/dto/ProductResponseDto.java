@@ -1,61 +1,62 @@
 package com.thereisnouserwebsite.product.dto;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.thereisnouserwebsite.product.entity.Product;
+
 import java.util.Objects;
-import org.springframework.http.HttpStatus;
 
 public class ProductResponseDto {
 
-    private int status;
-    private String message;
-    private List<ProductRequestDto> data;
+    private Long id;
+    private String name;
+    private Long quantity;
 
-    public ProductResponseDto(final HttpStatus status,
-                              final String message,
-                              final List<ProductRequestDto> data) {
-        this.status = status.value();
-        this.message = message;
-        this.data = data;
+    public ProductResponseDto() {
     }
 
-    public ProductResponseDto(final HttpStatus status,
-                              final String message) {
-        this.status = status.value();
-        this.message = message;
-        this.data = new ArrayList<>();
+    public ProductResponseDto(final Long id,
+                              final String name,
+                              final Long quantity) {
+        this.id = id;
+        this.name = name;
+        this.quantity = quantity;
     }
 
-    public int getStatus() {
-        return status;
+    public ProductResponseDto(final Product entity) {
+        this.id = entity.getId();
+        this.name = entity.getName();
+        this.quantity = entity.getQuantity();
     }
 
-    public void setStatus(HttpStatus status) {
-        this.status = status.value();
+    public Long getId() {
+        return id;
     }
 
-    public String getMessage() {
-        return message;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public String getName() {
+        return name;
     }
 
-    public List<ProductRequestDto> getData() {
-        return data;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public void setData(List<ProductRequestDto> data) {
-        this.data = data;
+    public Long getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(Long quantity) {
+        this.quantity = quantity;
     }
 
     @Override
     public int hashCode() {
         int hash = 5;
-        hash = 97 * hash + Objects.hashCode(this.status);
-        hash = 97 * hash + Objects.hashCode(this.message);
-        hash = 97 * hash + Objects.hashCode(this.data);
+        hash = 41 * hash + Objects.hashCode(this.id);
+        hash = 41 * hash + Objects.hashCode(this.name);
+        hash = 41 * hash + Objects.hashCode(this.quantity);
         return hash;
     }
 
@@ -71,17 +72,16 @@ public class ProductResponseDto {
 
         final ProductResponseDto other = (ProductResponseDto) obj;
 
-        if (!Objects.equals(this.message, other.message)) {
+        if (!Objects.equals(this.name, other.name)) {
             return false;
-        } else if (!Objects.equals(this.status, other.status)) {
+        } else if (!Objects.equals(this.id, other.id)) {
             return false;
         }
-
-        return Objects.equals(this.data, other.data);
+        return Objects.equals(this.quantity, other.quantity);
     }
 
     @Override
     public String toString() {
-        return "ProductResponseDto{" + "status=" + status + ", message=" + message + ", data=" + data + "}";
+        return "ProductResponseDto{" + "id=" + id + ", name=" + name + ", quantity=" + quantity + "}";
     }
 }
