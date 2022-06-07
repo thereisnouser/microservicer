@@ -11,6 +11,7 @@
 
     <modules>
         <module>product</module>
+        <module>product_category</module>
     </modules>
 
     <name>microservicer</name>
