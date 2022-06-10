@@ -1,6 +1,7 @@
 package com.thereisnouserwebsite.product.client.entity;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Table(name = "products")
@@ -56,21 +57,21 @@ public class Product {
     }
 
     @Override
-    public boolean equals(final Object o) {
-        if (this == o) {
+    public boolean equals(final Object obj) {
+        if (this == obj) {
             return true;
-        } else if (o == null || getClass() != o.getClass()) {
+        } else if (obj == null || getClass() != obj.getClass()) {
             return false;
         }
 
-        Product product = (Product) o;
+        Product other = (Product) obj;
 
-        if (!id.equals(product.id)) {
+        if (!Objects.equals(this.id, other.id)) {
             return false;
-        } else if (!name.equals(product.name)) {
+        } else if (!Objects.equals(this.name, other.name)) {
             return false;
         }
-        return quantity.equals(product.quantity);
+        return Objects.equals(this.quantity, other.quantity);
     }
 
     @Override
