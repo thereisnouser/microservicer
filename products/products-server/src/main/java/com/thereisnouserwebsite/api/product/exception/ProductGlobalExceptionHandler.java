@@ -53,14 +53,6 @@ public class ProductGlobalExceptionHandler extends ResponseEntityExceptionHandle
         return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
     }
 
-    @ExceptionHandler(BadRequestException.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ResponseEntity<Object> handleBadRequestException(final BadRequestException e) {
-        final ProductResponse response = new ProductResponse(HttpStatus.BAD_REQUEST.value(),
-                                                             e.getMessage());
-        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
-    }
-
     @ExceptionHandler(ConstraintViolationException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ResponseEntity<Object> handleConstraintViolationException(final ConstraintViolationException e) {
