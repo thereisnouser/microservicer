@@ -2,20 +2,27 @@ package com.thereisnouserwebsite.category.client.response;
 
 import com.thereisnouserwebsite.category.client.dto.CategoryResponseDto;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 public class CategoryResponse {
 
-    private int status;
+    @NotNull
+    private Integer status;
+
+    @NotBlank
     private String message;
+
+    @NotNull
     private List<CategoryResponseDto> data;
 
     public CategoryResponse() {
     }
 
-    public CategoryResponse(final int status,
+    public CategoryResponse(final Integer status,
                             final String message,
                             final List<CategoryResponseDto> data) {
         this.status = status;
@@ -23,18 +30,18 @@ public class CategoryResponse {
         this.data = data;
     }
 
-    public CategoryResponse(final int status,
+    public CategoryResponse(final Integer status,
                             final String message) {
         this.status = status;
         this.message = message;
         this.data = new ArrayList<>();
     }
 
-    public int getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 
@@ -57,7 +64,7 @@ public class CategoryResponse {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 89 * hash + this.status;
+        hash = 89 * hash + Objects.hashCode(this.status);
         hash = 89 * hash + Objects.hashCode(this.message);
         hash = 89 * hash + Objects.hashCode(this.data);
         return hash;
@@ -75,7 +82,7 @@ public class CategoryResponse {
 
         final CategoryResponse other = (CategoryResponse) obj;
 
-        if (this.status != other.status) {
+        if (!Objects.equals(this.status, other.status)) {
             return false;
         } else if (!Objects.equals(this.message, other.message)) {
             return false;
