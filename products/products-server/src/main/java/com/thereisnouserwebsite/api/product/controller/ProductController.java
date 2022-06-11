@@ -52,6 +52,24 @@ public class ProductController {
         return createSuccessResponseWithData(updatedProduct);
     }
 
+    @PatchMapping("/{productId}/category/{categoryId}")
+    public ResponseEntity<Object> addCategoryToProductById(
+            @PathVariable("productId") @Min(1) final Long productId,
+            @PathVariable("categoryId") @Min(1) final Long categoryId
+    ) {
+        final List<ProductResponseDto> updatedProduct = service.addCategoryToProductById(categoryId, productId);
+        return createSuccessResponseWithData(updatedProduct);
+    }
+
+    @DeleteMapping("/{productId}/category/{categoryId}")
+    public ResponseEntity<Object> removeCategoryFromProductById(
+            @PathVariable("productId") @Min(1) final Long productId,
+            @PathVariable("categoryId") @Min(1) final Long categoryId
+    ) {
+        final List<ProductResponseDto> updatedProduct = service.removeCategoryFromProductById(categoryId, productId);
+        return createSuccessResponseWithData(updatedProduct);
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> removeProductById(@PathVariable("id") @Min(1) final Long id) {
         final List<ProductResponseDto> removedProduct = service.removeProductById(id);

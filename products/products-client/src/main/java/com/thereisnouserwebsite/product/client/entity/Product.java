@@ -1,7 +1,11 @@
 package com.thereisnouserwebsite.product.client.entity;
 
+import com.thereisnouserwebsite.category.client.entity.Category;
+
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "products")
@@ -15,7 +19,24 @@ public class Product {
 
     private Long quantity;
 
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "products_categories",
+            joinColumns = { @JoinColumn(name = "product_id", referencedColumnName = "id") },
+            inverseJoinColumns = { @JoinColumn(name = "category_id", referencedColumnName = "id") }
+    )
+    private Set<Category> categories;
+
     public Product() {
+    }
+
+    public Product(final Long id,
+                   final String name,
+                   final Long quantity,
+                   final Set<Category> categories) {
+        this.id = id;
+        this.name = name;
+        this.quantity = quantity;
+        this.categories = categories;
     }
 
     public Product(final Long id,
@@ -24,12 +45,14 @@ public class Product {
         this.id = id;
         this.name = name;
         this.quantity = quantity;
+        this.categories = new HashSet<>();
     }
 
     public Product(final String name,
                    final Long quantity) {
         this.name = name;
         this.quantity = quantity;
+        this.categories = new HashSet<>();
     }
 
     public Long getId() {
@@ -56,6 +79,30 @@ public class Product {
         this.quantity = quantity;
     }
 
+    public Set<Category> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(Set<Category> categories) {
+        this.categories = categories;
+    }
+
+    public void addCategory(final Category category) {
+        if (categories == null) {
+            categories = new HashSet<>();
+        }
+
+        categories.add(category);
+    }
+
+    public void removeCategory(final Category category) {
+        if (categories == null) {
+            return;
+        }
+
+        categories.remove(category);
+    }
+
     @Override
     public boolean equals(final Object obj) {
         if (this == obj) {
@@ -79,6 +126,7 @@ public class Product {
         int result = id.hashCode();
         result = 31 * result + name.hashCode();
         result = 31 * result + quantity.hashCode();
+        result = 31 * result + categories.hashCode();
         return result;
     }
 
@@ -88,6 +136,7 @@ public class Product {
                 + "id=" + id
                 + ", name=" + name
                 + ", quantity=" + quantity
+                + ", categories=" + categories
                 + "}";
     }
 }
