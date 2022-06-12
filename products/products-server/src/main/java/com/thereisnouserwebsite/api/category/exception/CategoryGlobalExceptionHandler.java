@@ -47,7 +47,7 @@ public class CategoryGlobalExceptionHandler extends ResponseEntityExceptionHandl
 
     @ExceptionHandler(CategoryNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public ResponseEntity<Object> handleProductCategoryNotFoundException(final CategoryNotFoundException e) {
+    public ResponseEntity<Object> handleCategoryNotFoundException(final CategoryNotFoundException e) {
         final CategoryResponse response = new CategoryResponse(HttpStatus.NOT_FOUND.value(),
                                                                              e.getMessage());
         return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
