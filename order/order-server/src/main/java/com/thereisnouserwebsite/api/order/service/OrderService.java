@@ -1,0 +1,93 @@
+package com.thereisnouserwebsite.api.order.service;
+
+import com.thereisnouserwebsite.api.order.exception.OrderNotFoundException;
+import com.thereisnouserwebsite.api.order.repository.OrderRepository;
+import com.thereisnouserwebsite.order.client.dto.OrderCreateDto;
+import com.thereisnouserwebsite.order.client.dto.OrderResponseDto;
+import com.thereisnouserwebsite.order.client.dto.OrderUpdateDto;
+import com.thereisnouserwebsite.order.client.entity.Order;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.util.List;
+import java.util.stream.Collectors;
+
+@Service
+public class OrderService {
+
+    private final OrderRepository repository;
+
+    @Autowired
+    public OrderService(final OrderRepository repository) {
+        this.repository = repository;
+    }
+
+    public List<OrderResponseDto> getAllOrders() {
+        return repository
+                .findAll()
+                .stream()
+                .map(OrderResponseDto::new)
+                .collect(Collectors.toList());
+    }
+
+    public List<OrderResponseDto> getOrderById(final long id) {
+        final Order order = findOrderByIdOrThrowException(id);
+        return createListWithEntityMappedToDto(order);
+    }
+
+    public List<OrderResponseDto> createOrder(final OrderCreateDto dto) {
+        final LocalDate departureDate = LocalDate.now();
+        final LocalDate arrivalDate   = departureDate.plusDays(3);
+
+        // TODO: Send request to products service and receive product's data by id
+        final Order dtoMappedToEntity = new Order(
+                dto.getProductId(),
+                "<product_name>",
+                new BigDecimal("1.00"),
+                departureDate,
+                arrivalDate
+        );
+
+        final Order createdOrder = repository.save(dtoMappedToEntity);
+
+        return createListWithEntityMappedToDto(createdOrder);
+    }
+
+    public List<OrderResponseDto> updateOrder(final long id, final OrderUpdateDto dto) {
+        final Order orderToUpdate = findOrderByIdOrThrowException(id);
+
+        // TODO: Send request to products service and receive product's data by id
+        final Order dtoMappedToEntity = new Order(
+                id,
+                dto.getProductId(),
+                "<product_name>",
+                new BigDecimal("1.00"),
+                orderToUpdate.getDepartureDate(),
+                orderToUpdate.getArrivalDate()
+        );
+
+        final Order updatedOrder = repository.save(dtoMappedToEntity);
+
+        return createListWithEntityMappedToDto(updatedOrder);
+    }
+
+    public List<OrderResponseDto> removeOrderById(final long id) {
+        final Order orderToRemove = findOrderByIdOrThrowException(id);
+
+        repository.deleteById(id);
+
+        return createListWithEntityMappedToDto(orderToRemove);
+    }
+
+    private Order findOrderByIdOrThrowException(final long id) {
+        return repository.findById(id).orElseThrow(
+                () -> new OrderNotFoundException("Order with 'id' = " + id + " is not found")
+        );
+    }
+
+    private List<OrderResponseDto> createListWithEntityMappedToDto(final Order entity) {
+        return List.of(new OrderResponseDto(entity));
+    }
+}
