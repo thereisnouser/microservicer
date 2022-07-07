@@ -10,8 +10,8 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>products</module>
-        <module>orders</module>
+        <module>product</module>
+        <module>order</module>
     </modules>
 
     <properties>
