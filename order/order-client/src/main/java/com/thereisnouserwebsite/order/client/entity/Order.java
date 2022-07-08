@@ -19,36 +19,51 @@ public class Order {
     private Long productId;
     private String productName;
     private BigDecimal productPrice;
+    private Long customerId;
+    private String customerName;
+    private String customerAddress;
     private LocalDate departureDate;
     private LocalDate arrivalDate;
 
     public Order() {
     }
 
-    public Order(final Long id,
-                 final Long productId,
-                 final String productName,
+    public Order(final Long       id,
+                 final Long       productId,
+                 final String     productName,
                  final BigDecimal productPrice,
-                 final LocalDate departureDate,
-                 final LocalDate arrivalDate) {
-        this.id            = id;
-        this.productId     = productId;
-        this.productName   = productName;
-        this.productPrice  = productPrice;
-        this.departureDate = departureDate;
-        this.arrivalDate   = arrivalDate;
+                 final Long       customerId,
+                 final String     customerName,
+                 final String     customerAddress,
+                 final LocalDate  departureDate,
+                 final LocalDate  arrivalDate) {
+        this.id              = id;
+        this.productId       = productId;
+        this.productName     = productName;
+        this.productPrice    = productPrice;
+        this.customerId      = customerId;
+        this.customerName    = customerName;
+        this.customerAddress = customerAddress;
+        this.departureDate   = departureDate;
+        this.arrivalDate     = arrivalDate;
     }
 
-    public Order(final Long productId,
-                 final String productName,
+    public Order(final Long       productId,
+                 final String     productName,
                  final BigDecimal productPrice,
-                 final LocalDate departureDate,
-                 final LocalDate arrivalDate) {
-        this.productId     = productId;
-        this.productName   = productName;
-        this.productPrice  = productPrice;
-        this.departureDate = departureDate;
-        this.arrivalDate   = arrivalDate;
+                 final Long       customerId,
+                 final String     customerName,
+                 final String     customerAddress,
+                 final LocalDate  departureDate,
+                 final LocalDate  arrivalDate) {
+        this.productId       = productId;
+        this.productName     = productName;
+        this.productPrice    = productPrice;
+        this.customerId      = customerId;
+        this.customerName    = customerName;
+        this.customerAddress = customerAddress;
+        this.departureDate   = departureDate;
+        this.arrivalDate     = arrivalDate;
     }
 
     public Long getId() {
@@ -81,6 +96,30 @@ public class Order {
 
     public void setProductPrice(final BigDecimal productPrice) {
         this.productPrice = productPrice;
+    }
+
+    public Long getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(final Long customerId) {
+        this.customerId = customerId;
+    }
+
+    public String getCustomerName() {
+        return customerName;
+    }
+
+    public void setCustomerName(final String customerName) {
+        this.customerName = customerName;
+    }
+
+    public String getCustomerAddress() {
+        return customerAddress;
+    }
+
+    public void setCustomerAddress(final String customerAddress) {
+        this.customerAddress = customerAddress;
     }
 
     public LocalDate getDepartureDate() {
@@ -117,6 +156,12 @@ public class Order {
             return false;
         } else if (!Objects.equals(productPrice, other.productPrice)) {
             return false;
+        } else if (!Objects.equals(customerId, other.customerId)) {
+            return false;
+        } else if (!Objects.equals(customerName, other.customerName)) {
+            return false;
+        } else if (!Objects.equals(customerAddress, other.customerAddress)) {
+            return false;
         } else if (!Objects.equals(departureDate, other.departureDate)) {
             return false;
         }
@@ -129,6 +174,9 @@ public class Order {
         result = 31 * result + (productId != null ? productId.hashCode() : 0);
         result = 31 * result + (productName != null ? productName.hashCode() : 0);
         result = 31 * result + (productPrice != null ? productPrice.hashCode() : 0);
+        result = 31 * result + (customerId != null ? customerId.hashCode() : 0);
+        result = 31 * result + (customerName != null ? customerName.hashCode() : 0);
+        result = 31 * result + (customerAddress != null ? customerAddress.hashCode() : 0);
         result = 31 * result + (departureDate != null ? departureDate.hashCode() : 0);
         result = 31 * result + (arrivalDate != null ? arrivalDate.hashCode() : 0);
         return result;
@@ -141,6 +189,9 @@ public class Order {
                 ", productId=" + productId +
                 ", productName='" + productName + '\'' +
                 ", productPrice=" + productPrice +
+                ", customerId=" + customerId +
+                ", customerName='" + customerName + '\'' +
+                ", customerAddress='" + customerAddress + '\'' +
                 ", departureDate=" + departureDate +
                 ", arrivalDate=" + arrivalDate +
                 '}';
