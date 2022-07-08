@@ -24,7 +24,7 @@ public class ProductService {
     @Autowired
     public ProductService(final ProductRepository productRepository,
                           final CategoryRepository categoryRepository) {
-        this.productRepository  = productRepository;
+        this.productRepository = productRepository;
         this.categoryRepository = categoryRepository;
     }
 
@@ -51,7 +51,7 @@ public class ProductService {
 
     public List<ProductResponseDto> createProduct(final ProductCreateDto dto) {
         final Product dtoMappedToEntity = new Product(dto.getName(), dto.getPrice(), dto.getQuantity());
-        final Product savedProduct      = productRepository.save(dtoMappedToEntity);
+        final Product savedProduct = productRepository.save(dtoMappedToEntity);
 
         return createListWithEntityMappedToDto(savedProduct);
     }
@@ -60,13 +60,13 @@ public class ProductService {
         findProductByIdOrThrowException(id);
 
         final Product dtoMappedToEntity = new Product(id, dto.getName(), dto.getPrice(), dto.getQuantity());
-        final Product updatedProduct    = productRepository.save(dtoMappedToEntity);
+        final Product updatedProduct = productRepository.save(dtoMappedToEntity);
 
         return createListWithEntityMappedToDto(updatedProduct);
     }
 
     public List<ProductResponseDto> addCategoryToProductById(final long categoryId, final long productId) {
-        final Category category       = findCategoryByIdOrThrowException(categoryId);
+        final Category category = findCategoryByIdOrThrowException(categoryId);
         final Product productToUpdate = findProductByIdOrThrowException(productId);
 
         productToUpdate.addCategory(category);
@@ -76,7 +76,7 @@ public class ProductService {
     }
 
     public List<ProductResponseDto> removeCategoryFromProductById(final long categoryId, final long productId) {
-        final Category category       = findCategoryByIdOrThrowException(categoryId);
+        final Category category = findCategoryByIdOrThrowException(categoryId);
         final Product productToUpdate = findProductByIdOrThrowException(productId);
 
         productToUpdate.removeCategory(category);

@@ -46,36 +46,36 @@ public class OrderResponseDto {
     public OrderResponseDto() {
     }
 
-    public OrderResponseDto(final Long       id,
-                            final Long       productId,
-                            final String     productName,
+    public OrderResponseDto(final Long id,
+                            final Long productId,
+                            final String productName,
                             final BigDecimal productPrice,
-                            final Long       customerId,
-                            final String     customerName,
-                            final String     customerAddress,
-                            final LocalDate  departureDate,
-                            final LocalDate  arrivalDate) {
-        this.id              = id;
-        this.productId       = productId;
-        this.productName     = productName;
-        this.productPrice    = productPrice;
-        this.customerId      = customerId;
-        this.customerName    = customerName;
+                            final Long customerId,
+                            final String customerName,
+                            final String customerAddress,
+                            final LocalDate departureDate,
+                            final LocalDate arrivalDate) {
+        this.id = id;
+        this.productId = productId;
+        this.productName = productName;
+        this.productPrice = productPrice;
+        this.customerId = customerId;
+        this.customerName = customerName;
         this.customerAddress = customerAddress;
-        this.departureDate   = departureDate;
-        this.arrivalDate     = arrivalDate;
+        this.departureDate = departureDate;
+        this.arrivalDate = arrivalDate;
     }
 
     public OrderResponseDto(final Order entity) {
-        this.id              = entity.getId();
-        this.productId       = entity.getProductId();
-        this.productName     = entity.getProductName();
-        this.productPrice    = entity.getProductPrice();
-        this.customerId      = entity.getCustomerId();
-        this.customerName    = entity.getCustomerName();
+        this.id = entity.getId();
+        this.productId = entity.getProductId();
+        this.productName = entity.getProductName();
+        this.productPrice = entity.getProductPrice();
+        this.customerId = entity.getCustomerId();
+        this.customerName = entity.getCustomerName();
         this.customerAddress = entity.getCustomerAddress();
-        this.departureDate   = entity.getDepartureDate();
-        this.arrivalDate     = entity.getArrivalDate();
+        this.departureDate = entity.getDepartureDate();
+        this.arrivalDate = entity.getArrivalDate();
     }
 
     public Long getId() {

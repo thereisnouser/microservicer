@@ -3,16 +3,32 @@ package com.thereisnouserwebsite.product.client.dto;
 import com.thereisnouserwebsite.category.client.entity.Category;
 import com.thereisnouserwebsite.product.client.entity.Product;
 
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.util.Objects;
 import java.util.Set;
 
 public class ProductResponseDto {
 
+    @NotNull
+    @Min(1)
     private Long id;
+
+    @NotBlank
     private String name;
+
+    @NotNull
+    @DecimalMin("1.00")
     private BigDecimal price;
+
+    @NotNull
+    @Min(0)
     private Long quantity;
+
+    @NotNull
     private Set<Category> categories;
 
     public ProductResponseDto() {
@@ -23,18 +39,18 @@ public class ProductResponseDto {
                               final BigDecimal price,
                               final Long quantity,
                               final Set<Category> categories) {
-        this.id         = id;
-        this.name       = name;
-        this.price      = price;
-        this.quantity   = quantity;
+        this.id = id;
+        this.name = name;
+        this.price = price;
+        this.quantity = quantity;
         this.categories = categories;
     }
 
     public ProductResponseDto(final Product entity) {
-        this.id         = entity.getId();
-        this.name       = entity.getName();
-        this.price      = entity.getPrice();
-        this.quantity   = entity.getQuantity();
+        this.id = entity.getId();
+        this.name = entity.getName();
+        this.price = entity.getPrice();
+        this.quantity = entity.getQuantity();
         this.categories = entity.getCategories();
     }
 

@@ -28,42 +28,42 @@ public class Order {
     public Order() {
     }
 
-    public Order(final Long       id,
-                 final Long       productId,
-                 final String     productName,
+    public Order(final Long id,
+                 final Long productId,
+                 final String productName,
                  final BigDecimal productPrice,
-                 final Long       customerId,
-                 final String     customerName,
-                 final String     customerAddress,
-                 final LocalDate  departureDate,
-                 final LocalDate  arrivalDate) {
-        this.id              = id;
-        this.productId       = productId;
-        this.productName     = productName;
-        this.productPrice    = productPrice;
-        this.customerId      = customerId;
-        this.customerName    = customerName;
+                 final Long customerId,
+                 final String customerName,
+                 final String customerAddress,
+                 final LocalDate departureDate,
+                 final LocalDate arrivalDate) {
+        this.id = id;
+        this.productId = productId;
+        this.productName = productName;
+        this.productPrice = productPrice;
+        this.customerId = customerId;
+        this.customerName = customerName;
         this.customerAddress = customerAddress;
-        this.departureDate   = departureDate;
-        this.arrivalDate     = arrivalDate;
+        this.departureDate = departureDate;
+        this.arrivalDate = arrivalDate;
     }
 
-    public Order(final Long       productId,
-                 final String     productName,
+    public Order(final Long productId,
+                 final String productName,
                  final BigDecimal productPrice,
-                 final Long       customerId,
-                 final String     customerName,
-                 final String     customerAddress,
-                 final LocalDate  departureDate,
-                 final LocalDate  arrivalDate) {
-        this.productId       = productId;
-        this.productName     = productName;
-        this.productPrice    = productPrice;
-        this.customerId      = customerId;
-        this.customerName    = customerName;
+                 final Long customerId,
+                 final String customerName,
+                 final String customerAddress,
+                 final LocalDate departureDate,
+                 final LocalDate arrivalDate) {
+        this.productId = productId;
+        this.productName = productName;
+        this.productPrice = productPrice;
+        this.customerId = customerId;
+        this.customerName = customerName;
         this.customerAddress = customerAddress;
-        this.departureDate   = departureDate;
-        this.arrivalDate     = arrivalDate;
+        this.departureDate = departureDate;
+        this.arrivalDate = arrivalDate;
     }
 
     public Long getId() {

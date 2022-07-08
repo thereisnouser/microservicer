@@ -26,8 +26,8 @@ public class ProductCreateDto {
     public ProductCreateDto(final String name,
                             final BigDecimal price,
                             final Long quantity) {
-        this.name     = name;
-        this.price    = price;
+        this.name = name;
+        this.price = price;
         this.quantity = quantity;
     }
 

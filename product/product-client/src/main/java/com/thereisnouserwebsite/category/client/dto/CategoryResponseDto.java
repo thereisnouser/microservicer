@@ -19,13 +19,14 @@ public class CategoryResponseDto {
     public CategoryResponseDto() {
     }
 
-    public CategoryResponseDto(final Long id, final String name) {
-        this.id   = id;
+    public CategoryResponseDto(final Long id,
+                               final String name) {
+        this.id = id;
         this.name = name;
     }
 
     public CategoryResponseDto(final Category entity) {
-        this.id   = entity.getId();
+        this.id = entity.getId();
         this.name = entity.getName();
     }
 

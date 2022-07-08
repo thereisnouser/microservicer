@@ -15,15 +15,15 @@ import java.util.stream.Collectors;
 @Service
 public class CategoryService {
 
-    private final CategoryRepository repository;
+    private final CategoryRepository categoryRepository;
 
     @Autowired
-    public CategoryService(final CategoryRepository repository) {
-        this.repository = repository;
+    public CategoryService(final CategoryRepository categoryRepository) {
+        this.categoryRepository = categoryRepository;
     }
 
     public List<CategoryResponseDto> getAllCategories() {
-        return repository
+        return categoryRepository
                 .findAll()
                 .stream()
                 .map(CategoryResponseDto::new)
@@ -37,7 +37,7 @@ public class CategoryService {
 
     public List<CategoryResponseDto> createCategory(final CategoryCreateDto dto) {
         final Category dtoMappedToEntity = new Category(dto.getName());
-        final Category createdCategory   = repository.save(dtoMappedToEntity);
+        final Category createdCategory = categoryRepository.save(dtoMappedToEntity);
 
         return createListWithEntityMappedToDto(createdCategory);
     }
@@ -46,7 +46,7 @@ public class CategoryService {
         findCategoryByIdOrThrowException(id);
 
         final Category dtoMappedToEntity = new Category(id, dto.getName());
-        final Category updatedCategory   = repository.save(dtoMappedToEntity);
+        final Category updatedCategory = categoryRepository.save(dtoMappedToEntity);
 
         return createListWithEntityMappedToDto(updatedCategory);
     }
@@ -54,13 +54,13 @@ public class CategoryService {
     public List<CategoryResponseDto> removeCategory(final long id) {
         final Category categoryToRemove = findCategoryByIdOrThrowException(id);
 
-        repository.deleteById(id);
+        categoryRepository.deleteById(id);
 
         return createListWithEntityMappedToDto(categoryToRemove);
     }
 
     private Category findCategoryByIdOrThrowException(final long id) {
-        return repository.findById(id).orElseThrow(
+        return categoryRepository.findById(id).orElseThrow(
             () -> new CategoryNotFoundException("Category with 'id' = " + id + " is not found")
         );
     }

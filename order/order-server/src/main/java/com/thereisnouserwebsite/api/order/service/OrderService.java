@@ -17,15 +17,15 @@ import java.util.stream.Collectors;
 @Service
 public class OrderService {
 
-    private final OrderRepository repository;
+    private final OrderRepository orderRepository;
 
     @Autowired
-    public OrderService(final OrderRepository repository) {
-        this.repository = repository;
+    public OrderService(final OrderRepository orderRepository) {
+        this.orderRepository = orderRepository;
     }
 
     public List<OrderResponseDto> getAllOrders() {
-        return repository
+        return orderRepository
                 .findAll()
                 .stream()
                 .map(OrderResponseDto::new)
@@ -39,7 +39,7 @@ public class OrderService {
 
     public List<OrderResponseDto> createOrder(final OrderCreateDto dto) {
         final LocalDate departureDate = LocalDate.now();
-        final LocalDate arrivalDate   = departureDate.plusDays(3);
+        final LocalDate arrivalDate = departureDate.plusDays(3);
 
         // TODO: Send request to product and customer services and receive it's data by ids
         final Order dtoMappedToEntity = new Order(
@@ -53,7 +53,7 @@ public class OrderService {
                 arrivalDate
         );
 
-        final Order createdOrder = repository.save(dtoMappedToEntity);
+        final Order createdOrder = orderRepository.save(dtoMappedToEntity);
 
         return createListWithEntityMappedToDto(createdOrder);
     }
@@ -70,7 +70,7 @@ public class OrderService {
             // TODO: Set new customer info to order
         }
 
-        final Order updatedOrder = repository.save(orderToUpdate);
+        final Order updatedOrder = orderRepository.save(orderToUpdate);
 
         return createListWithEntityMappedToDto(updatedOrder);
     }
@@ -78,13 +78,13 @@ public class OrderService {
     public List<OrderResponseDto> removeOrderById(final long id) {
         final Order orderToRemove = findOrderByIdOrThrowException(id);
 
-        repository.deleteById(id);
+        orderRepository.deleteById(id);
 
         return createListWithEntityMappedToDto(orderToRemove);
     }
 
     private Order findOrderByIdOrThrowException(final long id) {
-        return repository.findById(id).orElseThrow(
+        return orderRepository.findById(id).orElseThrow(
                 () -> new OrderNotFoundException("Order with 'id' = " + id + " is not found")
         );
     }
