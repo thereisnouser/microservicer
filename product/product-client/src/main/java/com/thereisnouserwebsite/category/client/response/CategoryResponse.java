@@ -25,14 +25,14 @@ public class CategoryResponse {
     public CategoryResponse(final Integer status,
                             final String message,
                             final List<CategoryResponseDto> data) {
-        this.status  = status;
+        this.status = status;
         this.message = message;
-        this.data    = data;
+        this.data = data;
     }
 
     public CategoryResponse(final Integer status,
                             final String message) {
-        this.status  = status;
+        this.status = status;
         this.message = message;
     }
 

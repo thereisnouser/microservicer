@@ -27,10 +27,10 @@ public class Customer {
                     final String email,
                     final String phone,
                     final String address) {
-        this.id      = id;
-        this.name    = name;
-        this.email   = email;
-        this.phone   = phone;
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.phone = phone;
         this.address = address;
     }
 
@@ -38,9 +38,9 @@ public class Customer {
                     final String email,
                     final String phone,
                     final String address) {
-        this.name    = name;
-        this.email   = email;
-        this.phone   = phone;
+        this.name = name;
+        this.email = email;
+        this.phone = phone;
         this.address = address;
     }
 

@@ -42,10 +42,10 @@ public class Product {
                    final BigDecimal price,
                    final Long quantity,
                    final Set<Category> categories) {
-        this.id         = id;
-        this.name       = name;
-        this.price      = price;
-        this.quantity   = quantity;
+        this.id = id;
+        this.name = name;
+        this.price = price;
+        this.quantity = quantity;
         this.categories = categories;
     }
 
@@ -53,17 +53,17 @@ public class Product {
                    final String name,
                    final BigDecimal price,
                    final Long quantity) {
-        this.id       = id;
-        this.name     = name;
-        this.price    = price;
+        this.id = id;
+        this.name = name;
+        this.price = price;
         this.quantity = quantity;
     }
 
     public Product(final String name,
                    final BigDecimal price,
                    final Long quantity) {
-        this.name     = name;
-        this.price    = price;
+        this.name = name;
+        this.price = price;
         this.quantity = quantity;
     }
 

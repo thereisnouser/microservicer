@@ -10,7 +10,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
@@ -21,28 +28,28 @@ import java.util.List;
 @Validated
 public class OrderController {
 
-    private final OrderService service;
+    private final OrderService orderService;
 
     @Autowired
-    public OrderController(final OrderService service) {
-        this.service = service;
+    public OrderController(final OrderService orderService) {
+        this.orderService = orderService;
     }
 
     @GetMapping
     public ResponseEntity<Object> getAllOrders() {
-        final List<OrderResponseDto> orders = service.getAllOrders();
+        final List<OrderResponseDto> orders = orderService.getAllOrders();
         return createSuccessResponseWithData(orders);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Object> getOrderById(@PathVariable("id") @Min(1) final Long id) {
-        final List<OrderResponseDto> order = service.getOrderById(id);
+        final List<OrderResponseDto> order = orderService.getOrderById(id);
         return createSuccessResponseWithData(order);
     }
 
     @PostMapping
     public ResponseEntity<Object> createOrder(@Valid @RequestBody final OrderCreateDto dto) {
-        final List<OrderResponseDto> createdOrder = service.createOrder(dto);
+        final List<OrderResponseDto> createdOrder = orderService.createOrder(dto);
         return createSuccessResponseWithData(createdOrder);
     }
 
@@ -51,13 +58,13 @@ public class OrderController {
             @PathVariable("id") @Min(1) final Long id,
             @Valid @RequestBody final OrderUpdateDto dto
     ) {
-        final List<OrderResponseDto> updatedOrder = service.updateOrder(id, dto);
+        final List<OrderResponseDto> updatedOrder = orderService.updateOrder(id, dto);
         return createSuccessResponseWithData(updatedOrder);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> removeOrderById(@PathVariable("id") @Min(1) final Long id) {
-        final List<OrderResponseDto> removedOrder = service.removeOrderById(id);
+        final List<OrderResponseDto> removedOrder = orderService.removeOrderById(id);
         return createSuccessResponseWithData(removedOrder);
     }
 

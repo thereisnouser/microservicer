@@ -25,14 +25,14 @@ public class CustomerResponse {
     public CustomerResponse(final Integer status,
                             final String message,
                             final List<CustomerResponseDto> data) {
-        this.status  = status;
+        this.status = status;
         this.message = message;
-        this.data    = data;
+        this.data = data;
     }
 
     public CustomerResponse(final Integer status,
                             final String message) {
-        this.status  = status;
+        this.status = status;
         this.message = message;
     }
 

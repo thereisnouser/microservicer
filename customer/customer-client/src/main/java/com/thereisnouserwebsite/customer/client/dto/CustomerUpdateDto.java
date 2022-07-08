@@ -24,9 +24,9 @@ public class CustomerUpdateDto {
                              final String email,
                              final String phone,
                              final String address) {
-        this.name    = name;
-        this.email   = email;
-        this.phone   = phone;
+        this.name = name;
+        this.email = email;
+        this.phone = phone;
         this.address = address;
     }
 

@@ -19,8 +19,9 @@ public class Category {
     public Category() {
     }
 
-    public Category(final Long id, final String name) {
-        this.id   = id;
+    public Category(final Long id,
+                    final String name) {
+        this.id = id;
         this.name = name;
     }
 

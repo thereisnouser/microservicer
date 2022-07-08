@@ -33,18 +33,18 @@ public class CustomerResponseDto {
                                final String email,
                                final String phone,
                                final String address) {
-        this.id      = id;
-        this.name    = name;
-        this.email   = email;
-        this.phone   = phone;
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.phone = phone;
         this.address = address;
     }
 
     public CustomerResponseDto(final Customer entity) {
-        this.id      = entity.getId();
-        this.name    = entity.getName();
-        this.email   = entity.getEmail();
-        this.phone   = entity.getPhone();
+        this.id = entity.getId();
+        this.name = entity.getName();
+        this.email = entity.getEmail();
+        this.phone = entity.getPhone();
         this.address = entity.getAddress();
     }
 

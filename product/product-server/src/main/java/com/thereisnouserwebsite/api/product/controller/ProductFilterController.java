@@ -19,16 +19,16 @@ import java.util.List;
 @RequestMapping(EndpointPath.PRODUCTS_FILTER)
 public class ProductFilterController {
 
-    private final ProductService service;
+    private final ProductService productService;
 
     @Autowired
-    public ProductFilterController(final ProductService service) {
-        this.service = service;
+    public ProductFilterController(final ProductService productService) {
+        this.productService = productService;
     }
 
     @GetMapping("/category/{id}")
     public ResponseEntity<Object> filterByCategoryId(@PathVariable("id") @Min(1) final Long id) {
-        final List<ProductResponseDto> products = service.filterByCategoryId(id);
+        final List<ProductResponseDto> products = productService.filterByCategoryId(id);
         return createSuccessResponseWithData(products);
     }
 

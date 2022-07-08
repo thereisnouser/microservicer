@@ -1,7 +1,6 @@
 package com.thereisnouserwebsite.order.client.dto;
 
 import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
 public class OrderUpdateDto {
@@ -17,7 +16,7 @@ public class OrderUpdateDto {
 
     public OrderUpdateDto(final Long productId,
                           final Long customerId) {
-        this.productId  = productId;
+        this.productId = productId;
         this.customerId = customerId;
     }
 

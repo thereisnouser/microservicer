@@ -19,7 +19,7 @@ public class OrderCreateDto {
 
     public OrderCreateDto(final Long productId,
                           final Long customerId) {
-        this.productId  = productId;
+        this.productId = productId;
         this.customerId = customerId;
     }
 
