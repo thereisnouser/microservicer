@@ -6,11 +6,9 @@ import java.util.Objects;
 
 public class OrderUpdateDto {
 
-    @NotNull
     @Min(1)
     private Long productId;
 
-    @NotNull
     @Min(1)
     private Long customerId;
 
