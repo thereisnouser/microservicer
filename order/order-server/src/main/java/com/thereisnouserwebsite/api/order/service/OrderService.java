@@ -41,11 +41,14 @@ public class OrderService {
         final LocalDate departureDate = LocalDate.now();
         final LocalDate arrivalDate   = departureDate.plusDays(3);
 
-        // TODO: Send request to products service and receive product's data by id
+        // TODO: Send request to product and customer services and receive it's data by ids
         final Order dtoMappedToEntity = new Order(
                 dto.getProductId(),
                 "<product_name>",
                 new BigDecimal("1.00"),
+                dto.getCustomerId(),
+                "<customer_name>",
+                "<customer_address",
                 departureDate,
                 arrivalDate
         );
@@ -58,17 +61,16 @@ public class OrderService {
     public List<OrderResponseDto> updateOrder(final long id, final OrderUpdateDto dto) {
         final Order orderToUpdate = findOrderByIdOrThrowException(id);
 
-        // TODO: Send request to products service and receive product's data by id
-        final Order dtoMappedToEntity = new Order(
-                id,
-                dto.getProductId(),
-                "<product_name>",
-                new BigDecimal("1.00"),
-                orderToUpdate.getDepartureDate(),
-                orderToUpdate.getArrivalDate()
-        );
+        if (dto.getProductId() != null) {
+            // TODO: Send request to product service and receive it's data by id
+            // TODO: Set new product info to order
+        }
+        if (dto.getCustomerId() != null) {
+            // TODO: Send request to customer service and receive it's data by id
+            // TODO: Set new customer info to order
+        }
 
-        final Order updatedOrder = repository.save(dtoMappedToEntity);
+        final Order updatedOrder = repository.save(orderToUpdate);
 
         return createListWithEntityMappedToDto(updatedOrder);
     }

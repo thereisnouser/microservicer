@@ -46,7 +46,7 @@ public class OrderController {
         return createSuccessResponseWithData(createdOrder);
     }
 
-    @PutMapping("/{id}")
+    @PatchMapping("/{id}")
     public ResponseEntity<Object> updateOrder(
             @PathVariable("id") @Min(1) final Long id,
             @Valid @RequestBody final OrderUpdateDto dto
